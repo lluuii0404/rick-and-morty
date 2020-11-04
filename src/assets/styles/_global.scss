@@ -1,0 +1,38 @@
+@import-normalize;
+@import "colors";
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Roboto', 'Segoe UI', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: $main-black !important;
+    font-size: 14px;
+    width: 100vw !important;
+    min-height: 100vh !important;
+    background-color: $main-bg !important;
+}
+
+select, input {
+    outline: none;
+}
+
+button,
+button:active,
+button:hover {
+    outline: 0;
+    border-style: none;
+}
+
+ul {
+    padding: 0;
+    list-style-type: none;
+}
+
