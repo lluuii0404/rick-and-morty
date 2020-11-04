@@ -7,30 +7,30 @@ import {
 const initial = {
   data: null,
   error: null,
-  loading: null
+  loading: false
 }
 
 export const charactersReducer = (state = initial, action) => {
   switch (action.type) {
     case GET_ALL_CHARACTERS_LOADING: {
       return {
+        ...state,
         loading: true,
-        ...state
       };
     }
     case GET_ALL_CHARACTERS: {
       return {
+        ...state,
         loading: false,
         data: action.payload,
-        ...state
       }
     }
 
     case GET_ALL_CHARACTERS_ERROR: {
       return {
+        ...state,
         loading: false,
         error: action.error,
-        ...state
       }
     }
     default:

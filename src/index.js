@@ -9,6 +9,7 @@ import App from './components/App/App';
 import store from './store';
 
 import './assets/styles/_global.scss';
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 
 const history = createBrowserHistory();
 
