@@ -1,0 +1,13 @@
+@import "src/assets/styles/mixins";
+
+.container{
+    width: 100%;
+    height: 100%;
+    border: 1px solid blue;
+    //height: inherit;
+}
+.title{
+    @include font-family;
+    font-size: 36px;
+    text-align: center;
+}
