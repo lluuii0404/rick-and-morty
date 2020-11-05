@@ -1,51 +1,49 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+
 import { Table, Input, Space, Button } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 
+import { getColumns } from "./Columns";
+import { getQueryParams, removeQuestionFromQueryString, setQueryParams} from "../../utils/helper";
+
+import { Spinner } from "../Spinner";
+
+import styles from './styles.module.scss';
+
 export const CharactersComponent = ({
   characters,
-  getCharacters
+  loading,
+  getCharacters,
+  history,
+  location,
 }) => {
 
-  useEffect(() => {
-    getCharacters();
-  }, []);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const charactersList = characters && characters.results && characters.results.map(item =>
-    <li key={item.id}>{item.name}</li>
-  )
-
-  return (
-    <>
-      {charactersList}
-
-
-    </>
-  )
-};
-
-
-export const CharactersComp2 = () => {
-  const [data, setData] = useState(null);
+  // useEffect(() => {
+  //   getCharacters();
+  // }, []);
 
   useEffect(() => {
-    fetch("https://rickandmortyapi.com/api/character")
-      .then((res) =>
-        res.json().then((resp) => {
-          console.log(resp, "RESP");
-          setData(resp);
-        })
-      )
-      .catch((err) => err);
+    const search = removeQuestionFromQueryString(getQueryParams(location.search));
+
+    if (Object.keys(search).length > 0 ) {
+      if (search.hasOwnProperty('page')) {
+        setCurrentPage(Number(search.page))
+      }
+      getCharacters({...search});
+    }
+    else {
+      getCharacters();
+    }
   }, []);
+
+  const results = characters && characters.results;
+  const info = characters && characters.info;
+  console.log(">>> ", results, " <<< results <<<");
 
   const getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({
-                       setSelectedKeys,
-                       selectedKeys,
-                       confirm,
-                       clearFilters
-                     }) => (
+    filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => (
       <div style={{ padding: 8 }}>
         <Input
           placeholder={`Search ${dataIndex}`}
@@ -62,7 +60,7 @@ export const CharactersComp2 = () => {
             onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
             icon={<SearchOutlined />}
             size="small"
-            style={{ width: 90 }}
+            style={{ width: 90, background: "#4363b5", border: '1px solid #4363b5' }}
           >
             Search
           </Button>
@@ -77,65 +75,75 @@ export const CharactersComp2 = () => {
       </div>
     ),
     filterIcon: (filtered) => (
-      <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
+      <SearchOutlined style={{ color: filtered ? "#4363b5" : undefined }} />
     )
   });
 
-  const handleOnFilter = (value) => {
-    console.log("value handleOnFilter", value);
-    fetch(`https://rickandmortyapi.com/api/character/?name=${value}`)
-      .then((res) =>
-        res.json().then((resp) => {
-          console.log("handleOnFilter resp", resp);
-          setData(resp);
-        })
-      )
-      .catch((err) => err);
-  };
-
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
-    console.log(selectedKeys);
 
-    handleOnFilter(selectedKeys[0]);
+    if (selectedKeys[0]) {
+      const search = {
+        name: selectedKeys[0]
+      }
+
+      history.push({
+        pathname: location.pathname,
+        search: setQueryParams(search),
+      })
+      getCharacters(search);
+    }
   };
 
   const handleReset = (clearFilters) => {
     clearFilters();
-
-    fetch(`https://rickandmortyapi.com/api/character`)
-      .then((res) =>
-        res.json().then((resp) => {
-          console.log("handleOnFilter resp", resp);
-          setData(resp);
-        })
-      )
-      .catch((err) => err);
+    history.push({
+      pathname: location.pathname,
+      search: '',
+    })
+    getCharacters();
   };
 
-  const results = data && data.results;
+  const onChangePagination = (pagination) => {
+    setCurrentPage(pagination.current);
+    const search = removeQuestionFromQueryString(getQueryParams(location.search));
 
-  const columns = [
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-      width: "30%",
-      ...getColumnSearchProps("name")
-    },
-    {
-      title: "Gender",
-      dataIndex: "gender",
-      key: "gender",
-      width: "20%",
-      // ...getColumnSearchProps("gender")
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-      // ...getColumnSearchProps("status")
+    if (pagination.current) {
+      history.push({
+        pathname: location.pathname,
+        search: setQueryParams({
+          ...search,
+          page: pagination.current,
+        }),
+      })
+      getCharacters({...search, page: pagination.current});
     }
-  ];
-  return <Table columns={columns} dataSource={results} />;
+  };
+
+  const columns = getColumns(getColumnSearchProps);
+
+  const LoadingJSX = loading && <Spinner />
+  const TableJSX = !loading && (
+    <>
+      <Table
+        columns={columns}
+        dataSource={results}
+        onChange={onChangePagination}
+        pagination={{
+          current: currentPage,
+          pageSize: 20,
+          total: info && info.count,
+          showSizeChanger: false
+        }}
+      />
+    </>
+  )
+
+  return (
+    <div className={styles.container}>
+
+      { LoadingJSX }
+      { TableJSX }
+    </div>
+  );
 }

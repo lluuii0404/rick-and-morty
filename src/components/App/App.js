@@ -13,7 +13,7 @@ const App = () => {
     <>
       <Navigation />
       <Switch>
-        <Route exact path={ROUTES.CHARACTERS} component={CharactersPage} />
+        <Route path={[ROUTES.CHARACTERS]} component={CharactersPage} />
         <Route exact path={[`${ROUTES.DETAILS_CHARACTER}/:id`]} component={DetailsCharacterPage} />
         <Route exact path={ROUTES.LAYOUT} component={LayoutPage} />
         <Route exact path='/' render={() => <Redirect to={ROUTES.CHARACTERS} />} />

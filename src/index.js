@@ -2,16 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
-import { createBrowserHistory } from "history";
 
 import App from './components/App/App';
 
 import store from './store';
+import history from "./utils/history";
 
-import './assets/styles/_global.scss';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
-
-const history = createBrowserHistory();
+import './assets/styles/_global.scss';
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,0 +1,25 @@
+@import "src/assets/styles/mixins";
+@import "src/assets/styles/colors";
+
+.container{
+  width: 100%;
+  padding: 0 15px;
+}
+.header{
+  @include font-family;
+  font-size: 18px;
+  font-weight: 500;
+}
+.photo{
+  width: 45px;
+  height: 45px;
+  background-position: center center;
+  background-size: cover;
+}
+.name{
+  cursor: pointer;
+  &:hover{
+    font-weight: 500;
+    color: $secondary-black;
+  }
+}

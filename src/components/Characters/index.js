@@ -1,10 +1,12 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {CharactersComp2, CharactersComponent} from './CharactersComponent';
-import { getCharacters } from "../../actions/actinsCharacters";
+import { withRouter } from "react-router";
+import { CharactersComponent} from './CharactersComponent';
+import { getCharacters } from "../../actions/actionsCharacters";
 
 const mapStateToProps = state => ({
-  characters: state.characters.data
+  characters: state.characters.data,
+  loading: state.characters.loading
 })
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators(
@@ -15,5 +17,4 @@ const mapDispatchToProps = dispatch => ({
   )
 })
 
-export const Characters = connect(mapStateToProps, mapDispatchToProps)(CharactersComponent)
-export const Characters2 = connect(mapStateToProps, mapDispatchToProps)(CharactersComp2)
+export const Characters = withRouter(connect(mapStateToProps, mapDispatchToProps)(CharactersComponent));
