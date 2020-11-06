@@ -1,7 +1,13 @@
 import React from 'react';
 
+import { DetailsCharacter } from "../../components/DetailsCharacter";
+
+import styles from "./styles.module.scss";
+
 export const DetailsCharacterPage = () => {
   return (
-    <>Details Character Page</>
+    <div className={styles.container}>
+      <DetailsCharacter />
+    </div>
   )
 };

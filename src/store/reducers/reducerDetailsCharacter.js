@@ -14,23 +14,23 @@ export const detailsCharacterReducer = (state = initial, action) => {
   switch (action.type) {
     case GET_DETAILS_CHARACTER_LOADING: {
       return {
+        ...state,
         loading: true,
-        ...state
       };
     }
     case GET_DETAILS_CHARACTER: {
       return {
+        ...state,
         loading: false,
         character: action.payload,
-        ...state
       }
     }
 
     case GET_DETAILS_CHARACTER_ERROR: {
       return {
+        ...state,
         loading: false,
         error: action.error,
-        ...state
       }
     }
     default:

@@ -20,8 +20,6 @@ export const getCharacters = (search= {}) => async (dispatch) => {
     ? `${API.CHARACTERS}/?${searchParams}`
     : `${API.CHARACTERS}`;
 
-  // console.log(">>> ", url, " <<< url <<<");
-
   dispatch(getCharactersRequest())
 
   try {

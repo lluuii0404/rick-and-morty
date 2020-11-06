@@ -1,7 +1,10 @@
 import React from "react";
 import styles from './styles.module.scss';
 
-export const getColumns = (getColumnSearchProps) => [
+export const getColumns = (
+  getColumnSearchProps,
+  _redirectToDetailsCharacter
+) => [
   {
     title: (<span className={styles.header}>Photo</span>),
     dataIndex: "image",
@@ -15,7 +18,7 @@ export const getColumns = (getColumnSearchProps) => [
     key: "name",
     width: "27%",
     ...getColumnSearchProps("name"),
-    render: (name, record) => <span className={styles.name} onClick={() => {console.log('record.id', record.id)}}>{name}</span>,
+    render: (name, record) => <span className={styles.name} onClick={() => _redirectToDetailsCharacter(record.id)}>{name}</span>,
   },
   {
     title: (<span className={styles.header}>Gender</span>),
