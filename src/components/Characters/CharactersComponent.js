@@ -135,6 +135,15 @@ export const CharactersComponent = ({
           total: info && info.count,
           showSizeChanger: false
         }}
+        onRow={(record) => {
+          return {
+            onClick: event => {
+              event.preventDefault();
+              history.push(`${ROUTES.DETAILS_CHARACTER}/${record.id}`)
+            }
+          }
+        }}
+        rowClassName={styles.rowStyle}
       />
     </>
   )
