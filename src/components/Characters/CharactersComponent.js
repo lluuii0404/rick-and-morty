@@ -3,10 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { Table, Input, Space, Button } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 
-import { getColumns } from "./Columns";
-import { getQueryParams, removeQuestionFromQueryString, setQueryParams} from "../../utils/helper";
-
 import { Spinner } from "../Spinner";
+
+import { getQueryParams, removeQuestionFromQueryString, setQueryParams} from "../../utils/helper";
+import { getColumns } from "./Columns";
+import * as ROUTES from '../../utils/routes'
 
 import styles from './styles.module.scss';
 
@@ -19,10 +20,6 @@ export const CharactersComponent = ({
 }) => {
 
   const [currentPage, setCurrentPage] = useState(1);
-
-  // useEffect(() => {
-  //   getCharacters();
-  // }, []);
 
   useEffect(() => {
     const search = removeQuestionFromQueryString(getQueryParams(location.search));
@@ -40,7 +37,6 @@ export const CharactersComponent = ({
 
   const results = characters && characters.results;
   const info = characters && characters.info;
-  console.log(">>> ", results, " <<< results <<<");
 
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => (
@@ -120,7 +116,11 @@ export const CharactersComponent = ({
     }
   };
 
-  const columns = getColumns(getColumnSearchProps);
+  const _redirectToDetailsCharacter = (id) => {
+    history.push(`${ROUTES.DETAILS_CHARACTER}/${id}`)
+  }
+
+  const columns = getColumns(getColumnSearchProps, _redirectToDetailsCharacter);
 
   const LoadingJSX = loading && <Spinner />
   const TableJSX = !loading && (
@@ -135,6 +135,15 @@ export const CharactersComponent = ({
           total: info && info.count,
           showSizeChanger: false
         }}
+        onRow={(record) => {
+          return {
+            onClick: event => {
+              event.preventDefault();
+              history.push(`${ROUTES.DETAILS_CHARACTER}/${record.id}`)
+            }
+          }
+        }}
+        rowClassName={styles.rowStyle}
       />
     </>
   )

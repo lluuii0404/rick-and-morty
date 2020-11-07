@@ -1,0 +1,72 @@
+@import "src/assets/styles/mixins";
+@import "src/assets/styles/colors";
+
+.container{
+  padding: 20px;
+  box-shadow: $main-shadow;
+  background-color: $main-white;
+  border-radius: 10px;
+  margin: 5% auto;
+  min-width: 300px;
+  max-width: 700px;
+  min-height: 200px;
+  max-height: 580px;
+}
+.title{
+  h1 {
+    @include font-family;
+    text-align: center;
+    margin-top: 0;
+  }
+}
+.containerInfo{
+  display: flex;
+  flex-direction: row;
+  .image{
+    width: 40%;
+    max-width: 250px;
+    min-width: 50px;
+    max-height: 350px;
+    min-height: 100px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    margin-right: auto;
+    box-shadow: $main-shadow;
+    border-radius: 10px;
+  }
+  .information {
+    width: 60%;
+    padding: 0 5px 0 15px;
+  }
+  .row{
+    margin: 10px 0;
+
+  }
+  .rowTitle{
+    @include font-family;
+    font-size: 17px;
+    text-decoration: underline;
+  }
+  .rowText{
+    font-size: 16px;
+  }
+}
+
+.button{
+  width: 200px;
+  color: $main-black;
+  background-color: $main-white;
+  border: 2px solid $main-black;
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+  padding: 7px 20px;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  &:hover{
+    color: $main-white;
+    background-color: $secondary-black;
+    border: 2px solid $secondary-black;
+  }
+}
