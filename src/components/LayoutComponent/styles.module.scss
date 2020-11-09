@@ -1,0 +1,207 @@
+@import "src/assets/styles/mixins";
+@import "src/assets/styles/colors";
+
+.container{
+  width: 350px;
+  height: 231px;
+  padding: 16px 36px 22px 33px;
+  background: $main-white;
+  position: relative;
+  margin: 10% auto;
+}
+
+.block{
+  border-radius: 5px;
+  padding: 3px 4px 5px 4px;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 2px 6px 0px #9F9BA0;
+  position: relative;
+}
+.border{
+  width: 100%;
+  height: 100%;
+  border: 1px solid ;
+
+  border-image-source: url('../../assets/border.png');
+  border-width: 3px;
+
+  border-image-slice:20 20 20 20;
+  border-image-width:20px 20px 20px 20px;
+  border-image-outset:0px 0px 0px 0px;
+  border-image-repeat:stretch stretch;
+  padding: 14px 9px 7px 10px;
+
+}
+.border-container{
+  //border: 1px solid red;
+  width:100%;
+  height: 100%
+}
+.text{
+  padding-left: 11px;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: normal;
+  margin-bottom: 8px;
+  .study{
+    display: inline-block;
+    font-family: 'AT Open Sans';
+    font-size: 16px;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 19px;
+    text-align: left;
+    color: #000;
+    margin-bottom: 4px;
+  }
+  .sales{
+    display: inline-block;
+    font-family: Arial;
+    color: #808080;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    font-size: 12px;
+  }
+
+  .money {
+    display: inline-block;
+    color: #333333;
+    font-family: Arial;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    font-size: 12px;
+  }
+}
+.month-plan{
+  border: 1px solid #d1e7f5;
+  background-color: #000000;
+  background-image: linear-gradient(to top, #effaff 0%, #ffffff 100%);
+  width: 100%;
+  height: 94px;
+  border-radius: 5px;
+  color: #000;
+  padding: 5px 7px 0px 7px;
+  font-size: 12px;
+  .month-text{
+    //font-family: 'AT Open Sans';
+    padding-left: 3px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    width: 175px;
+    color: #262626;
+    font-style: normal;
+    line-height: 16px;
+    text-align: left;
+    span{
+      letter-spacing: 0.1px;
+    }
+  }
+  .progress-bar{
+    margin-left: 1px;
+    margin-top: 5px;
+    width: 230px;
+    height: 15px;
+    box-shadow: 0 1px 0 #ffffff;
+    border: 1px solid #9ecbe8;
+    position: relative;
+    .bar{
+      height: 14px;
+      display: inline-block;
+      background-color: #9ecbe8;
+      transition: width .6s linear;
+    }
+    .progress-text{
+      position: absolute;
+      //top: -4px;
+      top: -2px;
+      left: 45%;
+      color: #1e4b69;
+      font-family: 'AT Open Sans';
+      font-weight: 500;
+      font-style: normal;
+      letter-spacing: normal;
+      line-height: normal;
+    }
+  }
+}
+.button{
+  margin-top: 13px;
+  button{
+    width: 115px;
+    height: 27px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.58), inset 0 2px 0 rgba(255, 255, 255, 0.25);
+    border: 1px solid #0d1c5f;
+    background-color: #ffffff;
+    background-image: linear-gradient(to top, #071b6f 0%, #6b81df 100%);
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 8px;
+    span{
+      //height: 13px;
+      color: #ffffff;
+      //font-family: "Arial MT";
+      font-size: 13px;
+      font-weight: 400;
+      font-style: normal;
+      letter-spacing: normal;
+      line-height: normal;
+      text-align: center;
+    }
+
+
+  }
+  span {
+    color: #999999;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: normal;
+    /* line-height: normal; */
+    text-align: left;
+    font-style: normal;
+    /* letter-spacing: 0; */
+    line-height: normal;
+    font-family: 'AT Open Sans';
+    font-size: 11px;
+    padding: 0 0 2px 1px;
+  }
+}
+.div{
+  position: absolute;
+  top:2px;
+  right: 1px;
+  border-radius: 2px;
+  background: #fff;
+  display: block;
+  box-shadow: 0px 2px 6px 0px #9F9BA0;
+  .green{
+    width: 24px;
+    height: 17px;
+    box-shadow: 0 1px 4px #ffffff, 0 0 3px rgba(255, 255, 255, 0.75), inset 0 0 3px rgba(62, 2, 2, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    background-color: #fff;
+    background-image: linear-gradient(to top, #148311 0%, #a8fe91 100%);
+    border-radius: 2px;
+
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    text-align: center;
+  }
+}
+.shadow{
+  width: 323px;
+  height: 12px;
+  opacity: 0.33;
+  background: url("../../assets/shadow.png") center center no-repeat;
+  background-size: cover;
+  position: absolute;
+  bottom: 17px;
+  left: 10px;
+}
